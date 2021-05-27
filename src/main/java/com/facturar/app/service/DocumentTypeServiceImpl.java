@@ -1,7 +1,7 @@
 package com.facturar.app.service;
 
-import com.facturar.app.entity.Province;
-import com.facturar.app.repository.ProvinceDao;
+import com.facturar.app.entity.DocumentType;
+import com.facturar.app.repository.DocumentTypeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,20 +9,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ProvinceServiceImpl implements ProvinceService{
-
+public class DocumentTypeServiceImpl implements DocumentTypeService {
     @Autowired
-    private ProvinceDao provinceDao;
+    private DocumentTypeDao documentTypeDao;
 
     @Override
     @Transactional(readOnly = true)
-    public Iterable<Province> findAll() {
-        return provinceDao.findAll();
+    public Iterable<DocumentType> findAll() {
+        return documentTypeDao.findAll();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Province> findAll(Pageable pageable) {
-        return provinceDao.findAll(pageable);
+    public Page<DocumentType> findAll(Pageable pageable) {
+        return documentTypeDao.findAll(pageable);
     }
 }
