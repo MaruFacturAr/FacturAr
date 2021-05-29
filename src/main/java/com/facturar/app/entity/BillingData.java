@@ -29,6 +29,10 @@ public class BillingData implements Serializable {
     @JoinColumn(name = "phone_id", referencedColumnName = "id")
     private Phone phone;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
     public BillingData(){
 
     }
@@ -87,5 +91,13 @@ public class BillingData implements Serializable {
 
     public void setPhone(Phone phone) {
         this.phone = phone;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

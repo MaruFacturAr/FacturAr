@@ -8,7 +8,9 @@ import org.springframework.data.domain.Pageable;
 
 import com.facturar.app.entity.CompanyEntity;
 import com.facturar.app.repository.CompanyDao;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CompanyServiceImpl implements CompanyService {
 
     @Autowired

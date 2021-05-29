@@ -24,7 +24,8 @@ public class CompanyEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date initial_date;
 
-    private Long iibb_code;
+    private String iibb_code;
+
 
     public CompanyEntity() {
 
@@ -47,11 +48,11 @@ public class CompanyEntity implements Serializable {
         this.initial_date = initial_date;
     }
 
-    public Long getIibb_code() {
+    public String getIibb_code() {
         return iibb_code;
     }
 
-    public void setIibb_code(Long iibb_code) {
+    public void setIibb_code(String iibb_code) {
         this.iibb_code = iibb_code;
     }
 
@@ -62,6 +63,7 @@ public class CompanyEntity implements Serializable {
     public void setBillingData(BillingData billingData) {
         this.billingData = billingData;
     }
+
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
