@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.facturar.app.entity.CompanyEntity;
-import com.facturar.app.entity.UserEntity;
 
 public interface CompanyService {
 	
