@@ -20,4 +20,6 @@ public interface CompanyService {
 
     public void deleteById(Long id);
 
+    public CompanyEntity findByuserId(Long userId);
+
 }

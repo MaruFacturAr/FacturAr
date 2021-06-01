@@ -41,4 +41,9 @@ public class CompanyServiceImpl implements CompanyService {
         companyDaoRepository.deleteById(id);
     }
 
+    @Override
+    public CompanyEntity findByuserId(Long userId) {
+        return companyDaoRepository.findByuserId(userId);
+    }
+
 }

@@ -6,4 +6,5 @@ import com.facturar.app.entity.CompanyEntity;
 
 public interface CompanyDao extends JpaRepository<CompanyEntity, Long> {
 
+    CompanyEntity findByuserId(Long userId);
 }

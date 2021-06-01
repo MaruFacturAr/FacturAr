@@ -12,6 +12,14 @@ public class Phone implements Serializable {
 
     private static final long serialVersionUID = 2294776912290782800L;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")

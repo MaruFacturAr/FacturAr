@@ -15,7 +15,8 @@ public class CompanyEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long user_id;
+    @Column(name = "user_id")
+    private Long userId;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "billing_data_id", referencedColumnName = "id")
@@ -31,14 +32,13 @@ public class CompanyEntity implements Serializable {
 
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return this.userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
-
 
     public Date getInitial_date() {
         return initial_date;
