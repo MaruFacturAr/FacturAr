@@ -1,16 +1,20 @@
 package com.facturar.app.controller;
 
+import java.io.File;
+import java.util.Optional;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.facturar.app.entity.AuthoWsaaAfipRequest;
-import com.facturar.app.entity.JwtRequest;
 import com.facturar.app.utils.ws.afip.AfipService;
 import com.facturar.app.utils.ws.afip.authorization.Auth;
 import com.facturar.app.utils.ws.afip.authorization.Authorizator;
 import com.facturar.app.utils.ws.afip.authorization.DSTDN;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.io.File;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin
