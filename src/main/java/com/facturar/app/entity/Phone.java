@@ -25,10 +25,6 @@ public class Phone implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "phone")
-    private UserEntity user;
-
     private Integer phone_type_id;
 
     private String country_code; // Harcode +54
@@ -51,9 +47,8 @@ public class Phone implements Serializable {
 
     }
 
-    public Phone(Long id, UserEntity user, Integer phone_type_id, String country_code, String number, String extension, Integer city_code) {
+    public Phone(Long id, Integer phone_type_id, String country_code, String number, String extension, Integer city_code) {
         this.id = id;
-        this.user = user;
         this.phone_type_id = phone_type_id;
         this.country_code = country_code;
         this.number = number;
@@ -61,13 +56,6 @@ public class Phone implements Serializable {
         this.city_code = city_code;
     }
 
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
-    }
 
     public Integer getPhone_type_id() {
         return phone_type_id;

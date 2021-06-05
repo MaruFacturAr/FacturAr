@@ -17,10 +17,6 @@ public class Address implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "address")
-    private UserEntity user;
-
     private String street;
 
     private String city;
@@ -35,24 +31,15 @@ public class Address implements Serializable {
 
     }
 
-    public Address(Long id, UserEntity user, String street, String city, Integer address_type_id, Integer province_id,
+    public Address(Long id, String street, String city, Integer address_type_id, Integer province_id,
                    Integer country_id) {
         super();
         this.id = id;
-        this.user = user;
         this.street = street;
         this.city = city;
         this.address_type_id = address_type_id;
         this.province_id = province_id;
         this.country_id = country_id;
-    }
-
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
     }
 
     public String getStreet() {

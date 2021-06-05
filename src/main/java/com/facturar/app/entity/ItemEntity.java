@@ -3,13 +3,7 @@ package com.facturar.app.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "items")
@@ -27,7 +21,7 @@ public class ItemEntity implements Serializable {
 
     private String code;
 
-    private String alernative_code;
+    private String alternative_code;
 
     private String description;
 
@@ -44,6 +38,9 @@ public class ItemEntity implements Serializable {
     private int status_id;
 
     private Long company_id;
+
+    @Column(name = "user_id")
+    private Long userId;
 
     public ItemEntity() {
     }
@@ -80,12 +77,12 @@ public class ItemEntity implements Serializable {
         this.code = code;
     }
 
-    public String getAlernative_code() {
-        return alernative_code;
+    public String getAlternative_code() {
+        return alternative_code;
     }
 
-    public void setAlernative_code(String alernative_code) {
-        this.alernative_code = alernative_code;
+    public void setAlternative_code(String alternative_code) {
+        this.alternative_code = alternative_code;
     }
 
     public String getDescription() {
@@ -144,6 +141,13 @@ public class ItemEntity implements Serializable {
         this.company_id = company_id;
     }
 
+    public Long getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
 
 

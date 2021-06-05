@@ -1,5 +1,6 @@
 package com.facturar.app.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,12 @@ public class ItemServiceImpl implements ItemService {
     @Transactional
     public void deleteById(Long id) {
         itemDaoRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ItemEntity> findAllByUserIdAndCodeOrName(Long userId, String code, String name) {
+        return itemDaoRepository.findAllByUserIdAndCodeOrName(userId, code, name);
     }
 
 }

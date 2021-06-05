@@ -5,16 +5,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import com.facturar.app.config.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.facturar.app.entity.ItemEntity;
 import com.facturar.app.service.ItemService;
@@ -26,10 +21,15 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
+    @Autowired
+    private SecurityUtil securityUtil;
+
     // Create a new Item
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody ItemEntity item) {
+        Long userId = securityUtil.getCurrentUserId();
+        item.setUserId(userId);
         return ResponseEntity.status(HttpStatus.CREATED).body(itemService.save(item));
     }
 
@@ -46,6 +46,14 @@ public class ItemController {
         return ResponseEntity.ok(item);
     }
 
+    @GetMapping("/find")
+    public ResponseEntity<?> findAllCodeOrName(@RequestParam String code, @RequestParam String name ) {
+
+        Long userId = securityUtil.getCurrentUserId();
+        List<ItemEntity> item = itemService.findAllByUserIdAndCodeOrName(userId, code, name);
+
+        return ResponseEntity.ok(item);
+    }
     // Obs: Maru entiendo que una factura generada no tendria que poder modificarse.
     // Por eso no hay servicio para updatear un factura.En caso constrario lo creamos
 

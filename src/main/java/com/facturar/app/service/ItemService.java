@@ -1,5 +1,6 @@
 package com.facturar.app.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.facturar.app.entity.ItemEntity;
@@ -14,4 +15,6 @@ public interface ItemService {
 
     public void deleteById(Long id);
 
+    public List<ItemEntity> findAllByUserIdAndCodeOrName(Long userId, String code,
+                                                 String name);
 }
