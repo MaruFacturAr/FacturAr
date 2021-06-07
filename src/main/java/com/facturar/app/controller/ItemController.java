@@ -26,7 +26,7 @@ public class ItemController {
 
     // Create a new Item
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody ItemEntity item) {
         Long userId = securityUtil.getCurrentUserId();
         item.setUserId(userId);
@@ -47,7 +47,7 @@ public class ItemController {
     }
 
     @GetMapping("/find")
-    public ResponseEntity<?> findAllCodeOrName(@RequestParam String code, @RequestParam String name ) {
+    public ResponseEntity<?> findAllCodeOrName(@RequestParam(required = false) String code, @RequestParam(required = false) String name ) {
 
         Long userId = securityUtil.getCurrentUserId();
         List<ItemEntity> item = itemService.findAllByUserIdAndCodeOrName(userId, code, name);
