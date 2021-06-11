@@ -17,4 +17,7 @@ public interface ItemService {
 
     public List<ItemEntity> findAllByUserIdAndCodeOrName(Long userId, String code,
                                                  String name);
+    public ItemEntity activate(Long id, Long userId);
+
+    public ItemEntity deactivate(Long id, Long userId);
 }

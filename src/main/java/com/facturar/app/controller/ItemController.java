@@ -33,6 +33,20 @@ public class ItemController {
         return ResponseEntity.status(HttpStatus.CREATED).body(itemService.save(item));
     }
 
+    @PostMapping("/activate")
+    public ResponseEntity<?> activate(@RequestBody ItemEntity item) {
+        Long userId = securityUtil.getCurrentUserId();
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(itemService.activate(item.getId(),userId));
+    }
+
+    @PostMapping("/deactivate")
+    public ResponseEntity<?> deactivate(@RequestBody ItemEntity item) {
+        Long userId = securityUtil.getCurrentUserId();
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(itemService.deactivate(item.getId(),userId));
+    }
+
     // Read Items
 
     @GetMapping("/{id}")
