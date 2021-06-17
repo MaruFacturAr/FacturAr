@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.facturar.app.entity.ItemEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ItemDao extends JpaRepository<ItemEntity, Long> {
@@ -17,4 +18,6 @@ public interface ItemDao extends JpaRepository<ItemEntity, Long> {
     List<ItemEntity> findAllByUserIdAndCodeOrName(@Param("userId") Long userId, @Param("code")String code,
                                                   @Param("name") String name);
 
+
+    Optional<ItemEntity> findByIdAndUserId(Long id, Long userId);
 }

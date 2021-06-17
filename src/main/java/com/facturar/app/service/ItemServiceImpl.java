@@ -48,14 +48,14 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ItemEntity activate(Long id, Long userId) {
-        Optional<ItemEntity> item = itemDaoRepository.findById(id);
+        Optional<ItemEntity> item = itemDaoRepository.findByIdAndUserId(id, userId);
         item.get().setStatus_id(1);
         return  itemDaoRepository.save(item.get());
     }
 
     @Override
     public ItemEntity deactivate(Long id, Long userId) {
-        Optional<ItemEntity> item = itemDaoRepository.findById(id);
+        Optional<ItemEntity> item = itemDaoRepository.findByIdAndUserId(id, userId);
         item.get().setStatus_id(2);
         return  itemDaoRepository.save(item.get());
     }
