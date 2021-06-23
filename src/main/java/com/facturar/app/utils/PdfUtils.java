@@ -26,12 +26,12 @@ public class PdfUtils {
 				nombreCampoPDF = datoRecibido.getKey();
 				valorAInsertar = datoRecibido.getValue();
 				if (valorAInsertar == null) {
-					String msgError = "El dato" + nombreCampoPDF + "tiene valor null para insertar en el PDF "+ nombrePdf;
+					String msgError = "El dato " + nombreCampoPDF + " tiene valor null para insertar en el PDF "+ nombrePdf;
 					throw new Exception(msgError);
 				}
 				campoPDF = acroForm.getField(nombreCampoPDF);
 				if (campoPDF == null) {
-					String msgError = "El dato" + nombreCampoPDF + "no tiene un mapeo existente para el PDF"+ nombrePdf;
+					String msgError = "El dato " + nombreCampoPDF + " no tiene un mapeo existente para el PDF"+ nombrePdf;
 					throw new Exception(msgError);
 				}
 
@@ -52,7 +52,7 @@ public class PdfUtils {
 			}
 
 		} catch (Exception e) {
-			String msgError = "Error al intentar autocompletar el PDF";
+			String msgError = "Error al intentar autocompletar el PDF. Error: "+ e;
 			throw new Exception(msgError);
 		}
 
