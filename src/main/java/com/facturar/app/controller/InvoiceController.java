@@ -2,12 +2,25 @@ package com.facturar.app.controller;
 
 import com.facturar.app.config.SecurityUtil;
 import com.facturar.app.entity.InvoiceEntity;
+import com.facturar.app.entity.ItemEntity;
 import com.facturar.app.service.InvoiceService;
+import com.lowagie.text.pdf.codec.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,5 +62,42 @@ public class InvoiceController {
 
         return ResponseEntity.ok(invoices);
 
+    }
+
+
+    @GetMapping("/find")
+    public ResponseEntity<?> findAllCodeOrName(@RequestParam(required = false) String code, @RequestParam(required = false) String name ) {
+
+        //Long userId = securityUtil.getCurrentUserId();
+        InvoiceEntity entity = new InvoiceEntity();
+        entity.setNumber(1);
+        entity.setId(new Long(1));
+
+
+        List<InvoiceEntity> invoices = new ArrayList<InvoiceEntity>();
+        invoices.add(entity);
+
+        return ResponseEntity.ok(invoices);
+    }
+    @RequestMapping(value = "/pdfDummy/{id}", method = RequestMethod.GET)
+    public ResponseEntity<InputStreamResource> pdfDummy(@PathVariable(value = "id") Long id) {
+        //byte[] inFileBytes = Files.readAllBytes(Paths.get("src/main/resources/facturaWordPro.pdf").toAbsolutePath());
+        try {
+           // ClassPathResource pdfFile = new ClassPathResource("facturaWordPro.pdf");
+
+            //String encoded = Base64.encodeBytes(inFileBytes);
+            InputStream is = new FileInputStream(
+                    new File("/home/ubuntu/pdf/facturaWordPro.pdf"));
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.set(HttpHeaders.CONTENT_DISPOSITION,
+                    "attachment; filename=facturaWordPro.pdf");
+            return new ResponseEntity<>(
+                    new InputStreamResource(is),
+                    headers,
+                    HttpStatus.OK);
+        }catch (IOException ex) {
+            throw new RuntimeException("IOError writing file to output stream");
+        }
     }
 }
