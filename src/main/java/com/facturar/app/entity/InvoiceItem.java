@@ -28,6 +28,12 @@ public class InvoiceItem implements Serializable {
     private Double amount_op_ex;
 
     private Long invoice_id;
+    
+    @OneToOne
+    @JoinColumn(name = "item_id", referencedColumnName = "id",  insertable=false, updatable=false)
+    private ItemEntity item;
+    
+    
 
     //@ManyToOne
    // @JoinColumn(name = "invoice_id", nullable = false, updatable = false)
@@ -39,7 +45,15 @@ public class InvoiceItem implements Serializable {
     //@OneToMany(cascade = CascadeType.ALL, mappedBy = "invoiceItem")
     //private Set<InvoiceItemTax> invoiceItemTaxList;
 
-    public  InvoiceItem(){
+    public ItemEntity getItem() {
+		return item;
+	}
+
+	public void setItem(ItemEntity item) {
+		this.item = item;
+	}
+
+	public  InvoiceItem(){
 
     }
 

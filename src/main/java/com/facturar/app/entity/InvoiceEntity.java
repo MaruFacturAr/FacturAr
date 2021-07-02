@@ -99,7 +99,7 @@ public class InvoiceEntity implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "invoice_id")
-    private Set<InvoiceItem> invoiceItemList;
+    private List<InvoiceItem> invoiceItemList;
 
     public InvoiceEntity(){
     }
@@ -320,11 +320,11 @@ public class InvoiceEntity implements Serializable {
         this.userId = userId;
     }
 
-    public Set<InvoiceItem> getInvoiceItemList() {
+    public List<InvoiceItem> getInvoiceItemList() {
         return invoiceItemList;
     }
 
-    public void setInvoiceItemList(Set<InvoiceItem> invoiceItemList) {
+    public void setInvoiceItemList(List<InvoiceItem> invoiceItemList) {
         this.invoiceItemList = invoiceItemList;
     }
 
