@@ -27,15 +27,17 @@ public class InvoiceItem implements Serializable {
 
     private Double amount_op_ex;
 
-    @ManyToOne
-    @JoinColumn(name = "invoice_id", nullable = false, updatable = false)
-    private InvoiceEntity invoice;
+    private Long invoice_id;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoiceItem")
-    private Set<InvoiceItemIva> invoiceItemIvaList;
+    //@ManyToOne
+   // @JoinColumn(name = "invoice_id", nullable = false, updatable = false)
+    //private InvoiceEntity invoice;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoiceItem")
-    private Set<InvoiceItemTax> invoiceItemTaxList;
+     //@OneToMany(cascade = CascadeType.ALL, mappedBy = "invoiceItem")
+    //private Set<InvoiceItemIva> invoiceItemIvaList;
+
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "invoiceItem")
+    //private Set<InvoiceItemTax> invoiceItemTaxList;
 
     public  InvoiceItem(){
 
@@ -98,27 +100,35 @@ public class InvoiceItem implements Serializable {
         this.amount_op_ex = amount_op_ex;
     }
 
-    public InvoiceEntity getInvoice() {
-        return invoice;
+   // public InvoiceEntity getInvoice() {
+    //    return invoice;
+    //}
+
+    //public void setInvoice(InvoiceEntity invoice) {
+     //   this.invoice = invoice;
+    //}
+
+    //public Set<InvoiceItemIva> getInvoiceItemIvaList() {
+      //  return invoiceItemIvaList;
+    //}
+
+    //public void setInvoiceItemIvaList(Set<InvoiceItemIva> invoiceItemIvaList) {
+   //     this.invoiceItemIvaList = invoiceItemIvaList;
+    //}
+
+   // public Set<InvoiceItemTax> getInvoiceItemTaxList() {
+    //    return invoiceItemTaxList;
+    //}
+
+   // public void setInvoiceItemTaxList(Set<InvoiceItemTax> invoiceItemTaxList) {
+    //    this.invoiceItemTaxList = invoiceItemTaxList;
+    //}
+
+    public Long getInvoice_id() {
+        return invoice_id;
     }
 
-    public void setInvoice(InvoiceEntity invoice) {
-        this.invoice = invoice;
-    }
-
-    public Set<InvoiceItemIva> getInvoiceItemIvaList() {
-        return invoiceItemIvaList;
-    }
-
-    public void setInvoiceItemIvaList(Set<InvoiceItemIva> invoiceItemIvaList) {
-        this.invoiceItemIvaList = invoiceItemIvaList;
-    }
-
-    public Set<InvoiceItemTax> getInvoiceItemTaxList() {
-        return invoiceItemTaxList;
-    }
-
-    public void setInvoiceItemTaxList(Set<InvoiceItemTax> invoiceItemTaxList) {
-        this.invoiceItemTaxList = invoiceItemTaxList;
+    public void setInvoice_id(Long invoice_id) {
+        this.invoice_id = invoice_id;
     }
 }

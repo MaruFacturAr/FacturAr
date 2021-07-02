@@ -70,7 +70,7 @@ public class InvoiceController {
 
         //Long userId = securityUtil.getCurrentUserId();
         InvoiceEntity entity = new InvoiceEntity();
-        entity.setNumber(1);
+        entity.setNumber(new Long(1));
         entity.setId(new Long(1));
 
 

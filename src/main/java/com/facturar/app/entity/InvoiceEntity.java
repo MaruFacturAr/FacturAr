@@ -56,9 +56,9 @@ public class InvoiceEntity implements Serializable {
     private CustomersEntity customer;
 
 
-    private Integer number;
+    private Long number;
 
-    private  Long currencyId;
+    private  Long currency_id;
 
     private Double total_amount;
 
@@ -97,7 +97,8 @@ public class InvoiceEntity implements Serializable {
     @Column(name = "user_id")
     private Long userId;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoice")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "invoice_id")
     private Set<InvoiceItem> invoiceItemList;
 
     public InvoiceEntity(){
@@ -175,20 +176,20 @@ public class InvoiceEntity implements Serializable {
         this.counterfoils_id = counterfoils_id;
     }
 
-    public Integer getNumber() {
+    public Long getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(Long number) {
         this.number = number;
     }
 
-    public Long getCurrencyId() {
-        return currencyId;
+    public Long getCurrency_id() {
+        return currency_id;
     }
 
-    public void setCurrencyId(Long currencyId) {
-        this.currencyId = currencyId;
+    public void setCurrency_id(Long currency_id) {
+        this.currency_id = currency_id;
     }
 
     public Double getTotal_amount() {
