@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "invoices")
@@ -19,6 +20,7 @@ public class InvoiceEntity implements Serializable {
 
     private Long customer_id;
 
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date created_date;
 
@@ -32,6 +34,27 @@ public class InvoiceEntity implements Serializable {
     private Long sale_point_id;
 
     private Long counterfoils_id;
+
+    @OneToOne
+    @JoinColumn(name = "voucher_id", referencedColumnName = "id",  insertable=false, updatable=false)
+    private VoucherEntity voucher;
+
+    @OneToOne
+    @JoinColumn(name = "sale_point_id", referencedColumnName = "id",  insertable=false, updatable=false)
+    private SalesPointEntity sale_point;
+
+    @OneToOne
+    @JoinColumn(name = "counterfoils_id", referencedColumnName = "id",  insertable=false, updatable=false)
+    private CounterfoilEntity counterfoil;
+
+    @OneToOne
+    @JoinColumn(name = "company_id", referencedColumnName = "id",  insertable=false, updatable=false)
+    private CompanyEntity company;
+
+    @OneToOne
+    @JoinColumn(name = "customer_id", referencedColumnName = "id",  insertable=false, updatable=false)
+    private CustomersEntity customer;
+
 
     private Integer number;
 
@@ -75,7 +98,7 @@ public class InvoiceEntity implements Serializable {
     private Long userId;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoice")
-    private List<InvoiceItem> invoiceItemList;
+    private Set<InvoiceItem> invoiceItemList;
 
     public InvoiceEntity(){
     }
@@ -296,11 +319,51 @@ public class InvoiceEntity implements Serializable {
         this.userId = userId;
     }
 
-    public List<InvoiceItem> getInvoiceItemList() {
+    public Set<InvoiceItem> getInvoiceItemList() {
         return invoiceItemList;
     }
 
-    public void setInvoiceItemList(List<InvoiceItem> invoiceItemList) {
+    public void setInvoiceItemList(Set<InvoiceItem> invoiceItemList) {
         this.invoiceItemList = invoiceItemList;
+    }
+
+    public VoucherEntity getVoucher() {
+        return voucher;
+    }
+
+    public void setVoucher(VoucherEntity voucher) {
+        this.voucher = voucher;
+    }
+
+    public SalesPointEntity getSale_point() {
+        return sale_point;
+    }
+
+    public void setSale_point(SalesPointEntity sale_point) {
+        this.sale_point = sale_point;
+    }
+
+    public CounterfoilEntity getCounterfoil() {
+        return counterfoil;
+    }
+
+    public void setCounterfoil(CounterfoilEntity counterfoil) {
+        this.counterfoil = counterfoil;
+    }
+
+    public CompanyEntity getCompany() {
+        return company;
+    }
+
+    public void setCompany(CompanyEntity company) {
+        this.company = company;
+    }
+
+    public CustomersEntity getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(CustomersEntity customer) {
+        this.customer = customer;
     }
 }

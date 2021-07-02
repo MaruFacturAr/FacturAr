@@ -87,7 +87,8 @@ public class InvoiceController {
 
             //String encoded = Base64.encodeBytes(inFileBytes);
             InputStream is = new FileInputStream(
-                    new File("/home/ubuntu/pdf/facturaWordPro.pdf"));
+                    new File("src/main/resources/facturaWordPro.pdf"));
+                    //new File("/home/ubuntu/pdf/facturaWordPro.pdf"));
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
             headers.set(HttpHeaders.CONTENT_DISPOSITION,

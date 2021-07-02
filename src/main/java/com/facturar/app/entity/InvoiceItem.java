@@ -3,6 +3,7 @@ package com.facturar.app.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "invoice_items")
@@ -31,10 +32,10 @@ public class InvoiceItem implements Serializable {
     private InvoiceEntity invoice;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoiceItem")
-    private List<InvoiceItemIva> invoiceItemIvaList;
+    private Set<InvoiceItemIva> invoiceItemIvaList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoiceItem")
-    private List<InvoiceItemTax> invoiceItemTaxList;
+    private Set<InvoiceItemTax> invoiceItemTaxList;
 
     public  InvoiceItem(){
 
@@ -105,19 +106,19 @@ public class InvoiceItem implements Serializable {
         this.invoice = invoice;
     }
 
-    public List<InvoiceItemIva> getInvoiceItemIvaList() {
+    public Set<InvoiceItemIva> getInvoiceItemIvaList() {
         return invoiceItemIvaList;
     }
 
-    public void setInvoiceItemIvaList(List<InvoiceItemIva> invoiceItemIvaList) {
+    public void setInvoiceItemIvaList(Set<InvoiceItemIva> invoiceItemIvaList) {
         this.invoiceItemIvaList = invoiceItemIvaList;
     }
 
-    public List<InvoiceItemTax> getInvoiceItemTaxList() {
+    public Set<InvoiceItemTax> getInvoiceItemTaxList() {
         return invoiceItemTaxList;
     }
 
-    public void setInvoiceItemTaxList(List<InvoiceItemTax> invoiceItemTaxList) {
+    public void setInvoiceItemTaxList(Set<InvoiceItemTax> invoiceItemTaxList) {
         this.invoiceItemTaxList = invoiceItemTaxList;
     }
 }
