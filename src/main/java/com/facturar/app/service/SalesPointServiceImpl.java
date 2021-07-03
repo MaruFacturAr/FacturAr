@@ -56,4 +56,9 @@ public class SalesPointServiceImpl implements SalesPointService{
         salesPoint.get().setStatus_id(2);
         return  salesPointDao.save(salesPoint.get());
     }
+
+    @Override
+    public Iterable<SalesPointEntity> findByUserId(Long userId) {
+        return salesPointDao.findByUserId(userId);
+    }
 }

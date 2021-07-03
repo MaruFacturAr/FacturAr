@@ -1,21 +1,21 @@
 package com.facturar.app.controller;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import com.facturar.app.service.InvoiceService;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.facturar.app.entity.InvoiceEntity;
 import com.facturar.app.entity.InvoiceItem;
@@ -38,20 +38,25 @@ public class GeneradorFacturaPDF {
 	@Autowired
     private ItemService itemService;
 
-	@PostMapping("/create-pdf")
-	public ResponseEntity<?> generateFacturaPdf(@RequestBody InvoiceEntity invoiceEntity) {
+	@Autowired
+	private InvoiceService invoiceService;
 
+	@RequestMapping(value ="/create-pdf/{id}" , method = RequestMethod.GET)
+	public ResponseEntity<InputStreamResource> generateFacturaPdf(@PathVariable(value = "id") Long id) throws Exception {
+
+		InvoiceEntity invoiceEntity = invoiceService.findById(id).get();
 		String nombrePDF = "facturaWordPro";
 		String pathInputPdf = "";
 		String response = "";
-		
+		HttpHeaders headers = new HttpHeaders();
 		System.out.println(System.getProperty("user.dir"));
 		
 		if (!nombrePDF.isEmpty() || !nombrePDF.equals("")) {
-			pathInputPdf = "src/"+nombrePDF+".pdf";
+			//pathInputPdf = "src/"+nombrePDF+".pdf";
+			pathInputPdf = "/home/ubuntu/pdf/"+nombrePDF+".pdf";
 		} else {
 			String msgError = "Nombre del pdf vacio";
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(msgError);
+			throw new Exception(msgError);
 		}
 
 		try {
@@ -94,7 +99,7 @@ public class GeneradorFacturaPDF {
 			datosPDF.put("importe_otros_tributos", invoiceEntity.getTotal_taxes().toString());
 			datosPDF.put("importe_total",invoiceEntity.getTotal_amount().toString());
 
-			PDDocument documento = PDDocument.load(new File("C:\\Users\\Windows 10\\Documents\\GitHub\\FacturAr\\facturaWordPro.pdf"));
+			PDDocument documento = PDDocument.load(new File(pathInputPdf));
 			documento.setAllSecurityToBeRemoved(true); // Para algunos pdf que tienen cosas encriptadas
 			PdfUtils.completarPDF(documento, datosPDF, nombrePDF);
 
@@ -113,15 +118,24 @@ public class GeneradorFacturaPDF {
 
 			pdfStamper.close();
 
-			String encoded = Base64.encodeBytes(out2.toByteArray());
-			response = new String(encoded);
+			//String encoded = Base64.encodeBytes(out2.toByteArray());
+			//response = new String(encoded);
 
+			InputStream inputStream = new ByteArrayInputStream(out2.toByteArray());
+			headers.setContentType(MediaType.APPLICATION_PDF);
+			headers.set(HttpHeaders.CONTENT_DISPOSITION,
+					"attachment; filename=facturaWordPro.pdf");
+			return new ResponseEntity<>(
+					new InputStreamResource(inputStream),
+					headers,
+					HttpStatus.OK);
 		} catch (Exception e) {
 			String msgError = "Ha ocurrido un error en el autocompletado de la factura";
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(msgError + e);
+			throw new Exception(msgError);
+			//return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(msgError + e);
 		}
 
-		return ResponseEntity.status(HttpStatus.OK).body(response);
+
 	}
 	
 	private String getCondicionIva(Integer idTaxpayer) {

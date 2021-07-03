@@ -74,8 +74,8 @@ public class ItemController {
     // Read all items
     @GetMapping
     public List<ItemEntity> readAll() {
-
-        List<ItemEntity> items = StreamSupport.stream(itemService.findAll().spliterator(), false)
+        Long userId = securityUtil.getCurrentUserId();
+        List<ItemEntity> items = StreamSupport.stream(itemService.findByUserId(userId).spliterator(), false)
                 .collect(Collectors.toList());
 
         return items;

@@ -21,4 +21,6 @@ public interface VoucherService {
     public VoucherEntity activate(Long id, Long userId);
 
     public VoucherEntity deactivate(Long id, Long userId);
+
+    public Iterable<VoucherEntity> findByUserId(Long userId);
 }

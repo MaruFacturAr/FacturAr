@@ -1,8 +1,10 @@
 package com.facturar.app.controller;
 
 import com.facturar.app.config.SecurityUtil;
+import com.facturar.app.entity.CounterfoilEntity;
 import com.facturar.app.entity.InvoiceEntity;
 import com.facturar.app.entity.ItemEntity;
+import com.facturar.app.service.CounterfoilService;
 import com.facturar.app.service.InvoiceService;
 import com.lowagie.text.pdf.codec.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,8 @@ public class InvoiceController {
     private InvoiceService invoiceService;
 
     @Autowired
+    private CounterfoilService counterfoilService;
+    @Autowired
     private SecurityUtil securityUtil;
 
     // Create a new Item
@@ -41,7 +45,12 @@ public class InvoiceController {
     public ResponseEntity<?> create(@RequestBody InvoiceEntity invoice) {
         Long userId = securityUtil.getCurrentUserId();
         invoice.setUserId(userId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(invoiceService.save(invoice));
+        InvoiceEntity invoiceEntity= invoiceService.save(invoice);
+        CounterfoilEntity counterfoilEntity = counterfoilService.findById(invoiceEntity.getCounterfoils_id()).get();
+        Long nextNumber = counterfoilEntity.getNext_number() + 1;
+        counterfoilEntity.setNext_number(nextNumber);
+        counterfoilService.save(counterfoilEntity);
+        return ResponseEntity.status(HttpStatus.CREATED).body(invoiceEntity);
     }
 
     @GetMapping("/{id}")
@@ -66,16 +75,11 @@ public class InvoiceController {
 
 
     @GetMapping("/find")
-    public ResponseEntity<?> findAllCodeOrName(@RequestParam(required = false) String code, @RequestParam(required = false) String name ) {
+    public ResponseEntity<?> findAllCodeOrName(@RequestParam(required = false) String name ) {
 
-        //Long userId = securityUtil.getCurrentUserId();
-        InvoiceEntity entity = new InvoiceEntity();
-        entity.setNumber(new Long(1));
-        entity.setId(new Long(1));
+        Long userId = securityUtil.getCurrentUserId();
+        List<InvoiceEntity> invoices = invoiceService.findAllByUserIdOrName(userId, name);
 
-
-        List<InvoiceEntity> invoices = new ArrayList<InvoiceEntity>();
-        invoices.add(entity);
 
         return ResponseEntity.ok(invoices);
     }

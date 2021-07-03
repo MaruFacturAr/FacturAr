@@ -19,4 +19,6 @@ public interface SalesPointDao extends JpaRepository<SalesPointEntity, Long> {
 
 
     Optional<SalesPointEntity> findByIdAndUserId(Long id, Long userId);
+
+    Iterable<SalesPointEntity> findByUserId(Long userId);
 }

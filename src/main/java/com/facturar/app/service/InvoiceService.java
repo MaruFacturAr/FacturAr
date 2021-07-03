@@ -2,6 +2,7 @@ package com.facturar.app.service;
 
 import com.facturar.app.entity.InvoiceEntity;
 import com.facturar.app.entity.ItemEntity;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,4 +18,6 @@ public interface InvoiceService {
     public Optional<InvoiceEntity> findByIdAndUserId(Long id, Long userId);
 
     public List<InvoiceEntity> findByUserId(Long userId);
+
+    public List<InvoiceEntity> findAllByUserIdOrName(Long userId, String name);
 }

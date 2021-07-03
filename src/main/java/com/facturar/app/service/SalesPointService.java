@@ -19,4 +19,6 @@ public interface SalesPointService {
     public SalesPointEntity activate(Long id, Long userId);
 
     public SalesPointEntity deactivate(Long id, Long userId);
+
+    public Iterable<SalesPointEntity> findByUserId(Long userId);
 }

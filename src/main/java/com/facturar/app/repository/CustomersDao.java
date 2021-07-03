@@ -21,5 +21,7 @@ public interface CustomersDao extends JpaRepository<CustomersEntity, Long> {
 
 
     Optional<CustomersEntity> findByIdAndUserId(Long id, Long userId);
+
+    Iterable<CustomersEntity> findByUserId(Long userId);
 	
 }

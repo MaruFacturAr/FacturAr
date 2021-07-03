@@ -60,5 +60,10 @@ public class ItemServiceImpl implements ItemService {
         return  itemDaoRepository.save(item.get());
     }
 
+    @Override
+    public Iterable<ItemEntity> findByUserId(Long userId) {
+        return itemDaoRepository.findByUserId(userId);
+    }
+
 }
 

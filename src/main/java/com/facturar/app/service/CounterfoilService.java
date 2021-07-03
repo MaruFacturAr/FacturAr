@@ -25,4 +25,6 @@ public interface CounterfoilService {
 
     public CounterfoilEntity deactivate(Long id, Long userId);
 
+    public Iterable<CounterfoilEntity> findByUserId(Long userId);
+
 }

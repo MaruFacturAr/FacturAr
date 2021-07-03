@@ -56,4 +56,9 @@ public class CustomerServiceImpl implements CustomerService {
 		return customersEntity.get();
 	}
 
+	@Override
+	public Iterable<CustomersEntity> findByUserId(Long userId) {
+		return customersDaoRepository.findByUserId(userId);
+	}
+
 }

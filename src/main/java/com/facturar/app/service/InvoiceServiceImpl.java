@@ -43,4 +43,9 @@ public class InvoiceServiceImpl implements InvoiceService {
     public List<InvoiceEntity> findByUserId(Long userId) {
         return invoiceDao.findByUserId(userId);
     }
+
+    @Override
+    public List<InvoiceEntity> findAllByUserIdOrName(Long userId, String name) {
+        return invoiceDao.findAllByUserIdOrName(userId, name);
+    }
 }

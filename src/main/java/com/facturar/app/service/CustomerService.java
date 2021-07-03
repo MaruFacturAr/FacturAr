@@ -21,5 +21,7 @@ public interface CustomerService {
     public CustomersEntity activate(Long id, Long userId);
 
     public CustomersEntity deactivate(Long id, Long userId);
+
+    public Iterable<CustomersEntity> findByUserId(Long userId);
 	
 }

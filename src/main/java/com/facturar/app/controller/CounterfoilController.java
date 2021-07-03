@@ -73,8 +73,8 @@ public class CounterfoilController {
     // Read all items
     @GetMapping
     public List<CounterfoilEntity> readAll() {
-
-        List<CounterfoilEntity> counterfoilEntityList = StreamSupport.stream(counterfoilService.findAll().spliterator(), false)
+        Long userId = securityUtil.getCurrentUserId();
+        List<CounterfoilEntity> counterfoilEntityList = StreamSupport.stream(counterfoilService.findByUserId(userId).spliterator(), false)
                 .collect(Collectors.toList());
 
         return counterfoilEntityList;

@@ -86,9 +86,9 @@ public class CustomerController {
     //ReadAll
     @GetMapping
     public List<CustomersEntity> readAll(){
-
+        Long userId = securityUtil.getCurrentUserId();
         List<CustomersEntity> customers = StreamSupport
-                .stream(customerService.findAll().spliterator(), false)
+                .stream(customerService.findByUserId(userId).spliterator(), false)
                 .collect(Collectors.toList());
 
         return customers;

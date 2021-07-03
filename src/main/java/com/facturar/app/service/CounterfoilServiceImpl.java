@@ -61,4 +61,10 @@ public class CounterfoilServiceImpl implements CounterfoilService{
         counterfoilEntity.get().setStatus_id(2);
         return counterfoilEntity.get();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Iterable<CounterfoilEntity> findByUserId(Long userId) {
+        return counterfoilDao.findByUserId(userId);
+    }
 }

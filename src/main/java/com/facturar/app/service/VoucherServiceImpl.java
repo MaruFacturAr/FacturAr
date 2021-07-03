@@ -52,4 +52,9 @@ public class VoucherServiceImpl implements VoucherService{
         voucherEntity.get().setStatus_id(2);
         return  voucherDao.save(voucherEntity.get());
     }
+
+    @Override
+    public Iterable<VoucherEntity> findByUserId(Long userId) {
+        return voucherDao.findByUserId(userId);
+    }
 }

@@ -20,4 +20,6 @@ public interface ItemDao extends JpaRepository<ItemEntity, Long> {
 
 
     Optional<ItemEntity> findByIdAndUserId(Long id, Long userId);
+
+    Iterable<ItemEntity> findByUserId(Long userId);
 }

@@ -19,4 +19,6 @@ public interface VoucherDao extends JpaRepository<VoucherEntity, Long> {
 
 
     Optional<VoucherEntity> findByIdAndUserId(Long id, Long userId);
+
+    Iterable<VoucherEntity> findByUserId(Long userId);
 }

@@ -18,4 +18,6 @@ public interface CounterfoilDao extends JpaRepository<CounterfoilEntity, Long> {
 
 
     Optional<CounterfoilEntity> findByIdAndUserId(Long id, Long userId);
+
+    Iterable<CounterfoilEntity> findByUserId(Long userId);
 }

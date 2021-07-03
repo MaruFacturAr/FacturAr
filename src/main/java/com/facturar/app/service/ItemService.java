@@ -20,4 +20,6 @@ public interface ItemService {
     public ItemEntity activate(Long id, Long userId);
 
     public ItemEntity deactivate(Long id, Long userId);
+
+    public Iterable<ItemEntity> findByUserId(Long userId);
 }

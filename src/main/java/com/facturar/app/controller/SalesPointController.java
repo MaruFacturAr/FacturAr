@@ -73,8 +73,8 @@ public class SalesPointController {
     // Read all items
     @GetMapping
     public List<SalesPointEntity> readAll() {
-
-        List<SalesPointEntity> salesPointEntities = StreamSupport.stream(salesPointService.findAll().spliterator(), false)
+        Long userId = securityUtil.getCurrentUserId();
+        List<SalesPointEntity> salesPointEntities = StreamSupport.stream(salesPointService.findByUserId(userId).spliterator(), false)
                 .collect(Collectors.toList());
 
         return salesPointEntities;

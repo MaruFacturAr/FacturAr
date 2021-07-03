@@ -73,8 +73,8 @@ public class VoucherController {
     // Read all items
     @GetMapping
     public List<VoucherEntity> readAll() {
-
-        List<VoucherEntity> voucherEntities = StreamSupport.stream(voucherService.findAll().spliterator(), false)
+        Long userId = securityUtil.getCurrentUserId();
+        List<VoucherEntity> voucherEntities = StreamSupport.stream(voucherService.findByUserId(userId).spliterator(), false)
                 .collect(Collectors.toList());
 
         return voucherEntities;
